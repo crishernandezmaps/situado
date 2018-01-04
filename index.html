@@ -1,0 +1,133 @@
+<html>
+<head>
+  <title>Map</title>
+  <meta charset="utf-8" />
+    <link type="text/css" rel="stylesheet" href="css/d3map.css" />
+</head>
+<style>
+  html,body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+  }
+
+  #map {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+  }
+
+  .rm {
+     fill-opacity: 0;
+     fill: #4682B4;
+     stroke-opacity: 1;
+     stroke: black;
+     stroke-width: 2px;
+  }
+
+  .centros {
+     fill-opacity: 1;
+     fill: red;
+     stroke-opacity: 0.5;
+     stroke: black;
+     stroke-width: 1px;
+  }
+
+  .paraderos {
+     fill-opacity: 1;
+     fill: green;
+     stroke-opacity: 0.5;
+     stroke: black;
+     stroke-width: 1px;
+  }
+
+  .barrios {
+     fill-opacity: 0;
+     /* fill: yellow; */
+     stroke-opacity: 0.5;
+     stroke: black;
+     stroke-width: 1px;
+  }
+
+</style>
+
+<script>
+
+function makeSomeMaps() {
+
+    map = d3.carto.map();
+
+    d3.select("#map").call(map);
+
+    rm = d3.carto.layer.geojson();
+    rm.path("data/geojson/RM.geojson")
+    .label("RM")
+    .renderMode("svg")
+    .clickableFeatures(true)
+    .cssClass("rm");
+
+    centrosCulturales = d3.carto.layer.geojson();
+    centrosCulturales.path("data/geojson/centros_culturales.geojson")
+    .label("Centros Culturales")
+    .markerSize(2)
+    .renderMode("svg")
+    .clickableFeatures(false)
+    .cssClass("centros");
+
+    paraderos = d3.carto.layer.geojson();
+    paraderos.path("data/geojson/Paraderos.geojson")
+    .label("Paraderos")
+    .markerSize(2)
+    .renderMode("svg")
+    .clickableFeatures(false)
+    .cssClass("paraderos");
+
+
+    portales = d3.carto.layer.geojson();
+    portales.path("data/geojson/portales.geojson")
+    .label("Villa Portales")
+    .renderMode("svg")
+    .clickableFeatures(false)
+    .cssClass("barrios");
+
+    horizonte = d3.carto.layer.geojson();
+    horizonte.path("data/geojson/nuevo_horizonte.geojson")
+    .label("Nuevo Horizonte")
+    .renderMode("svg")
+    .clickableFeatures(false)
+    .cssClass("barrios");
+
+    chacabuco = d3.carto.layer.geojson();
+    chacabuco.path("data/geojson/chacabuco.geojson")
+    .label("Barrio Chacabuco")
+    .renderMode("svg")
+    .clickableFeatures(false)
+    .cssClass("barrios");
+
+    // Base
+    map
+      .setScale(11)
+      .centerOn([-70.673676,-33.459229],"latlong")
+      .addCartoLayer(portales)
+      .addCartoLayer(horizonte)
+      .addCartoLayer(chacabuco)
+      .addCartoLayer(centrosCulturales)
+      .addCartoLayer(paraderos)
+      .addCartoLayer(rm);
+
+
+
+  }
+
+</script>
+
+<body onload="makeSomeMaps()">
+<div id="map"></div>
+
+<footer>
+<script src="js/d3.v3.min.js" charset="utf-8" type="text/javascript"></script>
+<script src="js/d3.carto.map.js" type="text/javascript"></script>
+<script src="js/tile.js" type="text/javascript"></script>
+</footer>
+</body>
+</html>

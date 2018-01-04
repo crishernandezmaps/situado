@@ -1,0 +1,7 @@
+{
+"type": "FeatureCollection",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "Name": "villa portales", "description": null, "timestamp": null, "begin": null, "end": null, "altitudeMode": null, "tessellate": 1, "extrude": 0, "visibility": -1, "drawOrder": null, "icon": null }, "geometry": { "type": "Polygon", "coordinates": [ [ [ -70.687723646517711, -33.446319395309807, 0.0 ], [ -70.68758905722477, -33.444270510525499, 0.0 ], [ -70.691722796812158, -33.444605281414951, 0.0 ], [ -70.69201402310749, -33.446767198256133, 0.0 ], [ -70.691916713712615, -33.449402039516997, 0.0 ], [ -70.683856725456806, -33.449440183471907, 0.0 ], [ -70.683614568988332, -33.446479359654766, 0.0 ], [ -70.688162381855122, -33.446284707759283, 0.0 ], [ -70.687723646517711, -33.446319395309807, 0.0 ] ] ] } }
+]
+}

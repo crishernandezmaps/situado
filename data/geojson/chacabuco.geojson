@@ -1,0 +1,7 @@
+{
+"type": "FeatureCollection",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "Name": "Polígono sin título", "description": null, "timestamp": null, "begin": null, "end": null, "altitudeMode": null, "tessellate": 1, "extrude": 0, "visibility": -1, "drawOrder": null, "icon": null }, "geometry": { "type": "Polygon", "coordinates": [ [ [ -70.654286385740107, -33.380910623338103, 0.0 ], [ -70.654786261449331, -33.384431874540141, 0.0 ], [ -70.649969288380802, -33.384714299368952, 0.0 ], [ -70.649236688977865, -33.381042093933317, 0.0 ], [ -70.654286385740107, -33.380910623338103, 0.0 ] ] ] } }
+]
+}
