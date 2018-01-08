@@ -2,7 +2,10 @@
 <head>
   <title>Map</title>
   <meta charset="utf-8" />
-    <link type="text/css" rel="stylesheet" href="css/d3map.css" />
+  <meta name="viewport" content="width=device-width">
+  <link type="text/css" rel="stylesheet" href="css/d3map.css" />
+  <!-- <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ==" crossorigin="" /> -->
+  <link rel="icon" href="/favicon.ico" type="image/x-icon" />
 </head>
 <style>
   html,body {
@@ -21,21 +24,21 @@
      fill-opacity: 0;
      fill: #4682B4;
      stroke-opacity: 1;
-     stroke: black;
+     stroke: #f23e3e;
      stroke-width: 2px;
   }
 
   .centros {
      fill-opacity: 1;
-     fill: red;
+     fill: green;
      stroke-opacity: 0.5;
      stroke: black;
      stroke-width: 1px;
   }
 
-  .paraderos {
+  .plazas {
      fill-opacity: 1;
-     fill: green;
+     fill: cyan;
      stroke-opacity: 0.5;
      stroke: black;
      stroke-width: 1px;
@@ -59,28 +62,34 @@ function makeSomeMaps() {
 
     d3.select("#map").call(map);
 
+    base = d3.carto.layer.tile();
+
+    base
+    .path("elijahmeeks.map-azn21pbi")
+    .label("Terrain");
+
     rm = d3.carto.layer.geojson();
     rm.path("data/geojson/RM.geojson")
     .label("RM")
     .renderMode("svg")
-    .clickableFeatures(true)
+    .clickableFeatures(false)
     .cssClass("rm");
 
     centrosCulturales = d3.carto.layer.geojson();
-    centrosCulturales.path("data/geojson/centros_culturales.geojson")
+    centrosCulturales.path("data/geojson/cc.geojson")
     .label("Centros Culturales")
-    .markerSize(2)
+    .markerSize(5)
     .renderMode("svg")
     .clickableFeatures(false)
     .cssClass("centros");
 
-    paraderos = d3.carto.layer.geojson();
-    paraderos.path("data/geojson/Paraderos.geojson")
-    .label("Paraderos")
-    .markerSize(2)
+    plazas = d3.carto.layer.geojson();
+    plazas.path("data/geojson/plazas.geojson")
+    .label("Plazas de Bolsillo")
+    .markerSize(5)
     .renderMode("svg")
     .clickableFeatures(false)
-    .cssClass("paraderos");
+    .cssClass("plazas");
 
 
     portales = d3.carto.layer.geojson();
@@ -106,14 +115,15 @@ function makeSomeMaps() {
 
     // Base
     map
+      .addCartoLayer(base)
       .setScale(11)
       .centerOn([-70.673676,-33.459229],"latlong")
       .addCartoLayer(portales)
       .addCartoLayer(horizonte)
       .addCartoLayer(chacabuco)
       .addCartoLayer(centrosCulturales)
-      .addCartoLayer(paraderos)
-      .addCartoLayer(rm);
+      .addCartoLayer(plazas)
+      .addCartoLayer(rm)
 
 
 
@@ -128,6 +138,9 @@ function makeSomeMaps() {
 <script src="js/d3.v3.min.js" charset="utf-8" type="text/javascript"></script>
 <script src="js/d3.carto.map.js" type="text/javascript"></script>
 <script src="js/tile.js" type="text/javascript"></script>
+<!-- <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js" integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log==" crossorigin=""></script>
+<script src="js/leaflet.ajax.min.js" type="text/javascript"></script>
+<script src="js/tile.stamen.js" type="text/javascript"></script> -->
 </footer>
 </body>
 </html>
