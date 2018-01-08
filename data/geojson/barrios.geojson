@@ -1,0 +1,9 @@
+{
+"type": "FeatureCollection",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "id": 1, "Nombre": "Villa Portales" }, "geometry": { "type": "Point", "coordinates": [ -70.688856029439691, -33.447115176759745 ] } },
+{ "type": "Feature", "properties": { "id": 2, "Nombre": "Chacabuco" }, "geometry": { "type": "Point", "coordinates": [ -70.652015478931176, -33.382831724397732 ] } },
+{ "type": "Feature", "properties": { "id": 3, "Nombre": "Nuevo Horizonte" }, "geometry": { "type": "Point", "coordinates": [ -70.626598109120209, -33.498526275340453 ] } }
+]
+}

@@ -4,7 +4,6 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width">
   <link type="text/css" rel="stylesheet" href="css/d3map.css" />
-  <!-- <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ==" crossorigin="" /> -->
   <link rel="icon" href="/favicon.ico" type="image/x-icon" />
 </head>
 <style>
@@ -18,39 +17,70 @@
     height: 100%;
     width: 100%;
     position: absolute;
+    /* background: rgba(76,42,6,.2); */
   }
 
   .rm {
      fill-opacity: 0;
-     fill: #4682B4;
+     fill: black;
      stroke-opacity: 1;
-     stroke: #f23e3e;
+     stroke: #f2a41d;
      stroke-width: 2px;
+  }
+
+  .barrios {
+     fill-opacity: 1;
+     fill: #db2335;
+     stroke-opacity: 1;
+     stroke: black;
+     stroke-width: 1px;
   }
 
   .centros {
      fill-opacity: 1;
-     fill: green;
-     stroke-opacity: 0.5;
+     fill: #845400;
+     stroke-opacity: 1;
      stroke: black;
      stroke-width: 1px;
   }
 
   .plazas {
      fill-opacity: 1;
-     fill: cyan;
-     stroke-opacity: 0.5;
+     fill: #d1c138;
+     stroke-opacity: 1;
      stroke: black;
      stroke-width: 1px;
   }
 
-  .barrios {
-     fill-opacity: 0;
-     /* fill: yellow; */
-     stroke-opacity: 0.5;
+  .paraderos {
+     fill-opacity: 0.5;
+     fill: rgba(130,6,135,0.3);
+     stroke-opacity: 0;
      stroke: black;
      stroke-width: 1px;
   }
+
+  .legend {
+    position: relative;
+    z-index: 10;
+    height: 120px;
+    width: 200px;
+    top: 280px;
+    left: 10px;
+    overflow: auto;
+    color: white;
+    background: rgba(35,31,32,.85);
+  }
+
+  .legend > ul > li > img {
+    text-align: left;
+  }
+
+  ul {
+    list-style-type: none;
+  }
+
+
 
 </style>
 
@@ -66,7 +96,7 @@ function makeSomeMaps() {
 
     base
     .path("elijahmeeks.map-azn21pbi")
-    .label("Terrain");
+    .label("Mapa Base");
 
     rm = d3.carto.layer.geojson();
     rm.path("data/geojson/RM.geojson")
@@ -78,7 +108,7 @@ function makeSomeMaps() {
     centrosCulturales = d3.carto.layer.geojson();
     centrosCulturales.path("data/geojson/cc.geojson")
     .label("Centros Culturales")
-    .markerSize(5)
+    .markerSize(10)
     .renderMode("svg")
     .clickableFeatures(false)
     .cssClass("centros");
@@ -86,61 +116,58 @@ function makeSomeMaps() {
     plazas = d3.carto.layer.geojson();
     plazas.path("data/geojson/plazas.geojson")
     .label("Plazas de Bolsillo")
-    .markerSize(5)
+    .markerSize(10)
     .renderMode("svg")
     .clickableFeatures(false)
     .cssClass("plazas");
 
+    barrios = d3.carto.layer.geojson();
+    barrios.path("data/geojson/barrios.geojson")
+    .label("Barrios PQMB")
+    .markerSize(10)
+    .renderMode("svg")
+    .clickableFeatures(true)
+    .cssClass("barrios")
+    .on("load",function functionName() { console.log('caca'); });
 
-    portales = d3.carto.layer.geojson();
-    portales.path("data/geojson/portales.geojson")
-    .label("Villa Portales")
+    paraderos = d3.carto.layer.geojson();
+    paraderos.path("data/geojson/Paraderos.geojson")
+    .label("Paraderos Transantiago")
+    .markerSize(2)
     .renderMode("svg")
     .clickableFeatures(false)
-    .cssClass("barrios");
+    .cssClass("paraderos");
 
-    horizonte = d3.carto.layer.geojson();
-    horizonte.path("data/geojson/nuevo_horizonte.geojson")
-    .label("Nuevo Horizonte")
-    .renderMode("svg")
-    .clickableFeatures(false)
-    .cssClass("barrios");
-
-    chacabuco = d3.carto.layer.geojson();
-    chacabuco.path("data/geojson/chacabuco.geojson")
-    .label("Barrio Chacabuco")
-    .renderMode("svg")
-    .clickableFeatures(false)
-    .cssClass("barrios");
-
-    // Base
     map
       .addCartoLayer(base)
-      .setScale(11)
-      .centerOn([-70.673676,-33.459229],"latlong")
-      .addCartoLayer(portales)
-      .addCartoLayer(horizonte)
-      .addCartoLayer(chacabuco)
+      .setScale(10)
+      .centerOn([-70.6493287,-33.4439315],"latlong")
+      .addCartoLayer(barrios)
       .addCartoLayer(centrosCulturales)
       .addCartoLayer(plazas)
       .addCartoLayer(rm)
-
-
+      .addCartoLayer(paraderos);
 
   }
 
 </script>
 
 <body onload="makeSomeMaps()">
-<div id="map"></div>
+  <div id="map">
+    <div class="legend">
+      <ul>
+        <li><img src="img/a.png"> Barrio PQMB</li>
+        <li><img src="img/b.png"> Centros Culturales</li>
+        <li><img src="img/c.png"> Plaza de Bolsillo</li>
+        <li><img src="img/d.png"> Paraderos Transantiago</li>
+      </ul>
+    </div>
+  </div>
 
 <footer>
-<script src="js/d3.v3.min.js" charset="utf-8" type="text/javascript"></script>
-<script src="js/d3.carto.map.js" type="text/javascript"></script>
-<script src="js/tile.js" type="text/javascript"></script>
-<!-- <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js" integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log==" crossorigin=""></script>
-<script src="js/leaflet.ajax.min.js" type="text/javascript"></script>
-<script src="js/tile.stamen.js" type="text/javascript"></script> -->
+  <script src="js/d3.v3.min.js" charset="utf-8" type="text/javascript"></script>
+  <script src="js/d3.carto.map.js" type="text/javascript"></script>
+  <script src="js/tile.js" type="text/javascript"></script>
 </footer>
 </body>
 </html>
